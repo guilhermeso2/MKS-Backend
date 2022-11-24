@@ -1,4 +1,4 @@
-import { DataSource } from 'typeorm';
+import { EntityManager } from 'typeorm';
 import { User } from './user.entity';
 import * as bcrypt from 'bcrypt';
 import * as crypto from 'crypto';
@@ -12,14 +12,21 @@ import {
 
 @Injectable()
 export class UserRepository {
-  constructor(private dataSource: DataSource) {}
+  constructor(private manager: EntityManager) {}
+
+  repository = this.manager.getRepository(User);
+
+  async findOne(id: string) {
+    return await this.repository.findOne({ where: { id } });
+  }
+
   async createUser(
     createUserDto: CreateUserDto,
     role: UserRole,
   ): Promise<User> {
     const { email, name, password } = createUserDto;
 
-    const user = this.dataSource.manager.getRepository(User).create();
+    const user = this.repository.create();
     user.email = email;
     user.name = name;
     user.role = role;

@@ -5,8 +5,8 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   host: 'localhost',
   port: 5432,
   username: 'pguser',
-  password: 'pgpassword',
-  database: 'nestjs',
+  password: 'pgpassword123',
+  database: 'MKS-music',
   entities: [__dirname + '/../**/*.entity.{js,ts}'],
   synchronize: true,
 };

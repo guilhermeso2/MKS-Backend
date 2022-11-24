@@ -10,8 +10,9 @@ services:
     volumes:
       - pg-data:/var/lib/postgresql/data
     environment:
+      POSTGRES_DB: MKS-music
       POSTGRES_USER: pguser
-      POSTGRES_PASSWORD: pgpassword
+      POSTGRES_PASSWORD: pgpassword123
 
   adminer:
     image: adminer
@@ -19,5 +20,15 @@ services:
     ports:
       - 8080:8080
 
+  redis:
+    container_name: cache
+    image: redis
+    ports:
+      - 6379:6379
+    volumes:
+      - redis:/data    
+
 volumes:
   pg-data:
+  redis:
+    driver: local
