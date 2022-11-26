@@ -5,12 +5,17 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { typeOrmConfig } from './config/typeorm.config';
 import { UsersModule } from './users/users.module';
+import { AuthController } from './auth/auth.controller';
+import { AuthModule } from './auth/auth.module';
+import { MoviesModule } from './movies/movies.module';
 import * as redisStore from 'cache-manager-redis-store';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(typeOrmConfig),
     UsersModule,
+    AuthModule,
+    MoviesModule,
     ConfigModule.forRoot(),
     CacheModule.register({
       isGlobal: true,
@@ -25,7 +30,7 @@ import * as redisStore from 'cache-manager-redis-store';
     }),
     ConfigModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

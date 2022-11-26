@@ -3,6 +3,7 @@ import { User } from './user.entity';
 import * as bcrypt from 'bcrypt';
 import * as crypto from 'crypto';
 import { CreateUserDto } from './create-user.dto';
+import { CredentialsDto } from './credentials-user.dto';
 import { UserRole } from './user.roles.enum';
 import {
   ConflictException,
@@ -47,6 +48,17 @@ export class UserRepository {
           'Erro ao salvar o usuário no banco de dados',
         );
       }
+    }
+  }
+  
+  async checkCredentials(credentialsDto: CredentialsDto): Promise<User> {
+    const { email, password } = credentialsDto;
+    const user = await this.repository.findOne({ where: { email: email, status: true }});
+
+    if (user && (await user.checkPassword(password))) {
+      return user;
+    } else {
+      return null;
     }
   }
 
