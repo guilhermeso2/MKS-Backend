@@ -52,4 +52,3 @@ npm run start:dev
 
 - [Visual Studio Code](https://code.visualstudio.com) - IDE de desenvolvimento de aplicações Spring.
 - [Postman](https://www.postman.com/) - documentação das requisições API REST.
-- [Swagger](https://swagger.io) - framework para documentar as rotas da API.
